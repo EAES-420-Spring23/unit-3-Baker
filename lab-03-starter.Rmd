@@ -1,7 +1,7 @@
 ---
 title: "Lab 03 - Great Lakes Fish Stocking"
-author: "Insert your name here"
-date: "Insert date here"
+author: "Vincent Baker"
+date: "2/21/23"
 output: html_document
 ---
 
