@@ -45,10 +45,16 @@ There are 5,131 observations and 8 variables in the dataset. Lake and state prov
 
 ### Exercise 3
 
-Remove this text, and add your answer for Exercise 3 here.
-Add code chunks as needed.
-Don't forget to label your code chunk.
-Do not use spaces in code chunk labels.
+```{r salmon-weight}
+salmon_stock <- salmon_stock %>%
+  mutate(
+    AVERAGE = WEIGHT / NO_STOCKED * 1000
+  )
+salmon_stock
+```
+
+mutate() adds variables and keeps the existing ones. For example, it combined 'WEIGHT' and 'NO_STOCKED', and it created AVERAGE (the average weight for each salmon in each stocking event in grams).
+
 
 ### Exercise 4
 
