@@ -71,14 +71,49 @@ Lake Superior has the largest mean salmon per stocking event and Lake Michigan h
 
 ### Exercise 5
 
-Remove this text, and add your answer for Exercise 5 here.
-Add code chunks as needed.
-Don't forget to label your code chunk.
-Do not use spaces in code chunk labels.
+```{r fish-species, weight, summary-statistics}
+trout_stock <- fish_stock %>%
+  filter(
+    SPECIES %in% c("BKT", "BKN", "LAT", "RBT", "TRT"),
+    !is.na(WEIGHT),
+    LAKE != "ON"
+  )
+
+trout_stock <- trout_stock %>%
+  mutate(
+    AVERAGE = WEIGHT / NO_STOCKED * 1000)
+    trout_stock
+    
+trout_stock %>% 
+  group_by(LAKE) %>% 
+  summarize(MEAN_NO_STOCKED = mean(NO_STOCKED, na.rm = TRUE),
+            MEAN_WEIGHT = mean(WEIGHT, na.rm = TRUE)) %>% 
+  arrange(desc(MEAN_NO_STOCKED))
+```
+
+This code chunk above shows the data for trout species similar to the salmon species dataset. 
 
 ### Exercise 6
 
-Remove this text, and add your answer for Exercise 6 here.
-Add code chunks as needed.
-Don't forget to label your code chunk.
-Do not use spaces in code chunk labels.
+```{r annual-plot}
+trout_and_salmon_stock <- fish_stock %>%
+  filter(
+    SPECIES %in% c("CHS", "BKT"),
+    !is.na(WEIGHT)) %>%
+    group_by(YEAR, SPECIES, LAKE) %>%
+      summarise(ANNUAL_NO_STOCKED = sum(NO_STOCKED, na.rm = TRUE))
+
+ggplot(trout_and_salmon_stock, aes(x = YEAR, y = ANNUAL_NO_STOCKED, color = SPECIES)) +
+  geom_line() +
+    facet_wrap(~LAKE, ncol = 2) +
+      theme_bw() +
+      labs(
+        x = "YEAR",
+        y = "Annual number of salmon and trout stocked",
+        color = "Species"
+      )
+```
+
+Chinook salmon is stocked at a higher rate.
+Lake Michigan had the largest fish stocking activities. 
+Stocking reached its peak between 1988-2000 (~1989).
