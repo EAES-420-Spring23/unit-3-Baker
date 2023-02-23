@@ -58,10 +58,16 @@ mutate() adds variables and keeps the existing ones. For example, it combined 'W
 
 ### Exercise 4
 
-Remove this text, and add your answer for Exercise 4 here.
-Add code chunks as needed.
-Don't forget to label your code chunk.
-Do not use spaces in code chunk labels.
+```{r summary-statistics}
+salmon_stock %>% 
+  group_by(LAKE) %>% 
+  filter(YEAR > 1999) %>% 
+  summarize(MEAN_NO_STOCKED = mean(NO_STOCKED, na.rm = TRUE),
+            MEAN_WEIGHT = mean(WEIGHT, na.rm = TRUE)) %>% 
+  arrange(desc(MEAN_NO_STOCKED))
+```
+
+Lake Superior has the largest mean salmon per stocking event and Lake Michigan has the largest mean weight per stocking event.
 
 ### Exercise 5
 
