@@ -21,17 +21,27 @@ fish_stock <- read_csv("data/great-lakes-fish-stock.csv")
 
 There are 56,232 observations and 8 variables in this dataset. 
 
-```{r}
+```{r fish-stock}
 glimpse(fish_stock)
 ```
 
 
 ### Exercise 2
 
-Remove this text, and add your answer for Exercise 2 here.
-Add code chunks as needed.
-Don't forget to label your code chunk.
-Do not use spaces in code chunk labels.
+```{r fish-species}
+salmon_stock <- fish_stock %>%
+  filter(
+    SPECIES %in% c("ATS", "CHS", "COS"),
+    !is.na(WEIGHT),
+     LAKE != "ON"
+  )
+```
+
+```{r salmon-stock}
+glimpse(salmon_stock)
+```
+
+There are 5,131 observations and 8 variables in the dataset. Lake and state province are character strings and the rest are numerical data. 
 
 ### Exercise 3
 
