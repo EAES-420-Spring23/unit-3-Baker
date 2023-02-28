@@ -13,19 +13,37 @@ library(tidyverse)
 
 ```{r load-data, message = FALSE}
 catch_data <- readr::read_csv('https://raw.githubusercontent.com/rfordatascience/tidytuesday/master/data/2021/2021-06-08/fishing.csv')
+catch_data
 
 fish_stock <- read_csv("data/great-lakes-fish-stock.csv")
+fish_stock
 ```
 
 ## Exercises
 
 ### Exercise 1
 
-Remove this text, and add your answer for Exercise 1 here.
+```{r catch-data-subset}
+catch_data <- select(catch_data, year, lake, species, region, values)
+catch_data
+```
+
+```{r fish-stock-subset}
+fish_stock <- select(fish_stock, YEAR, MONTH, LAKE, STATE_PROV, SPECIES, WEIGHT)
+fish_stock
+```
+
 
 ### Exercise 2
 
-Remove this text, and add your answer for Exercise 2 here.
+```{r glimpse-catch-data}
+glimpse(catch_data)
+```
+
+```{r fish-stock}
+glimpse(fish_stock)
+```
+
 
 ### Exercise 3
 
