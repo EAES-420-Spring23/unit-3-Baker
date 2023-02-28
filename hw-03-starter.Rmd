@@ -47,7 +47,20 @@ glimpse(fish_stock)
 
 ### Exercise 3
 
-Remove this text, and add your answer for Exercise 3 here.
+```{r filter-catch, eval = TRUE}
+catch_data <- catch_data %>% 
+  filter(region == "U.S. Total",
+         species == "CHS",
+         lake == "MI")
+```
+
+```{r filter-stock, eval = TRUE}
+fish_stock <- fish_stock %>% 
+  filter(STATE_PROV %in% c("MI", "WI", "IL", "IN"),
+         SPECIES == "CHS",
+         LAKE == "MI")
+```
+
 
 ### Exercise 4
 
