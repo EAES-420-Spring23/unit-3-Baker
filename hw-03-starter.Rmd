@@ -143,11 +143,11 @@ fish_stock_yearly %>%
 
 ### Exercise 7
 
-```{r pivot-longer, eval = FALSE}
+```{r pivot-longer, eval = TRUE}
 catch_data %>% 
-  left_join(___) %>% 
-  ___(names_to = "activity",
-               values_to = "___",
+  left_join(fish_stock_yearly) %>% 
+  pivot_longer(names_to = "weight_lbs",
+               values_to = "1000",
                cols = 5:6)
 ```
 
