@@ -64,7 +64,13 @@ fish_stock <- fish_stock %>%
 
 ### Exercise 4
 
-Remove this text, and add your answer for Exercise 4 here.
+There are `r nrow(catch_data)` in this dataset.
+The first year is `r min(catch_data$year)` in this dataset.
+The last year is `r max(catch_data$year)` in this dataset.
+
+There are `r nrow(fish_stock)` in this dataset.
+The first year is `r min(fish_stock$YEAR)` in this dataset.
+The last year is `r max(fish_stock$YEAR)` in this dataset.
 
 ### Exercise 5
 
