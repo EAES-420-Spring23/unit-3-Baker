@@ -74,31 +74,83 @@ The last year is `r max(fish_stock$YEAR)` in this dataset.
 
 ### Exercise 5
 
-Remove this text, and add your answer for Exercise 5 here.
+```{r fish-stock-yearly}
+fish_stock_yearly <- fish_stock %>%
+  group_by(YEAR) %>%
+  summarize(STOCK_WEIGHT_YR = sum(WEIGHT))
+na.omit(fish_stock_yearly)
+```
+
 
 ### Code chunks provided
 
 Remember to change eval = FALSE, to eval = TRUE, when you are ready to run the code/knit the document.
 
-```{r finalize-fish-stock, eval = FALSE}
+```{r finalize-fish-stock, eval = TRUE}
 fish_stock_yearly <- fish_stock_yearly %>% 
   rename(year = YEAR) %>% 
   mutate(stock_weight_yr_lbs = as.integer(STOCK_WEIGHT_YR * 0.454 / 1000)) %>% # 1 lb = 1 kg * 0.454
   select(year, stock_weight_yr_lbs)
 ```
 
-```{r finalize-catch-data, eval = FALSE}
+```{r finalize-catch-data, eval = TRUE}
 catch_data <- catch_data %>% 
   rename(catch_weight_yr_lbs = values)
 ```
 
 ### Exercise 6
 
-Remove this text, and add your answer for Exercise 6 here.
+```{r left-join}
+left_join(fish_stock_yearly, catch_data)
+```
+
+52 rows from 1967-2018 were kept.
+
+```{r right-join}
+right_join(fish_stock_yearly, catch_data)
+```
+
+All rows were lost.
+
+```{r inner-join}
+inner_join(fish_stock_yearly, catch_data)
+```
+
+All rows were lost.
+
+```{r full-join}
+full_join(fish_stock_yearly, catch_data)
+```
+
+52 rows from 1967-2018 were kept.
+
+**For these last two examples we provide the code, just write narrative for both**
+
+```{r anti-join-v1, eval = TRUE}
+catch_data %>% 
+  anti_join(fish_stock_yearly)
+```
+
+All rows were lost and all variables were kept except 'fish_stock_yr_ibs.'
+
+```{r anti-join-v2, eval = TRUE}
+fish_stock_yearly %>% 
+  anti_join(catch_data)
+```
+
+52 rows from 1967-2018 were kept and all variables were lost except 'year' and 'stock_weight_yr_lbs.'
+
 
 ### Exercise 7
 
-Remove this text, and add your answer for Exercise 7 here.
+```{r pivot-longer, eval = FALSE}
+catch_data %>% 
+  left_join(___) %>% 
+  ___(names_to = "activity",
+               values_to = "___",
+               cols = 5:6)
+```
+
 
 ### Exercise 8
 
