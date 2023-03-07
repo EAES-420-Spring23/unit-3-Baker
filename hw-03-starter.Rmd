@@ -50,8 +50,8 @@ glimpse(fish_stock)
 ```{r filter-catch, eval = TRUE}
 catch_data <- catch_data %>% 
   filter(region == "U.S. Total",
-         species == "CHS",
-         lake == "MI")
+         species == "Chinook Salmon",
+         lake == "Michigan")
 ```
 
 ```{r filter-stock, eval = TRUE}
@@ -77,8 +77,7 @@ The last year is `r max(fish_stock$YEAR)` in this dataset.
 ```{r fish-stock-yearly}
 fish_stock_yearly <- fish_stock %>%
   group_by(YEAR) %>%
-  summarize(STOCK_WEIGHT_YR = sum(WEIGHT))
-na.omit(fish_stock_yearly)
+  summarize(STOCK_WEIGHT_YR = sum(WEIGHT, na.rm = TRUE))
 ```
 
 
@@ -104,25 +103,25 @@ catch_data <- catch_data %>%
 left_join(fish_stock_yearly, catch_data)
 ```
 
-52 rows from 1967-2018 were kept.
+All data from fish_stock_yearly and catch_data was kept.
 
 ```{r right-join}
 right_join(fish_stock_yearly, catch_data)
 ```
 
-All rows were lost.
+All of the variables from fish_stock_yearly were kept, but only observations that included data from the catch_data data frame.
 
 ```{r inner-join}
 inner_join(fish_stock_yearly, catch_data)
 ```
 
-All rows were lost.
+More of the same from the previous table.
 
 ```{r full-join}
 full_join(fish_stock_yearly, catch_data)
 ```
 
-52 rows from 1967-2018 were kept.
+All observations from the fish_stock_yearly and catch_data were kept.
 
 **For these last two examples we provide the code, just write narrative for both**
 
@@ -138,7 +137,7 @@ fish_stock_yearly %>%
   anti_join(catch_data)
 ```
 
-52 rows from 1967-2018 were kept and all variables were lost except 'year' and 'stock_weight_yr_lbs.'
+All variables from fish_stock_yearly were kept and all observations except those from 1992-1999 were kept.
 
 
 ### Exercise 7
@@ -146,12 +145,24 @@ fish_stock_yearly %>%
 ```{r pivot-longer, eval = TRUE}
 catch_data %>% 
   left_join(fish_stock_yearly) %>% 
-  pivot_longer(names_to = "weight_lbs",
-               values_to = "1000",
+  pivot_longer(names_to = "activity",
+               values_to = "weight_lbs",
                cols = 5:6)
 ```
 
 
 ### Exercise 8
 
-Remove this text, and add your answer for Exercise 8 here.
+```{r final-visualization, eval = TRUE}
+catch_data %>% 
+  left_join(fish_stock_yearly) %>% 
+  pivot_longer(names_to = "activity",
+               values_to = "weight_lbs",
+               cols = 5:6) %>%
+  ggplot(aes(x = year, y = weight_lbs, color = activity)) +
+  geom_line() +
+  theme_bw()
+  
+```
+
+The size of the fish catch has rapidly increased since the early 90s to 1995, then sharply decreased towards 2000 and has shown a steady decline in size; the amount of fish in Lake Michigan steadily increased toward the late 90s, then has steadily decreased over time. 
