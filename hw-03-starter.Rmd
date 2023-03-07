@@ -151,7 +151,7 @@ catch_data %>%
 ```
 
 
-### Exercise 8
+### Exercise 8 -.5
 
 ```{r final-visualization, eval = TRUE}
 catch_data %>% 
