@@ -17,7 +17,7 @@ fish_stock <- read_csv("data/great-lakes-fish-stock.csv")
 
 ## Exercises
 
-### Exercise 1
+### Exercise 1 -.5
 
 There are 56,232 observations and 8 variables in this dataset. 
 
@@ -56,7 +56,7 @@ salmon_stock
 mutate() adds variables and keeps the existing ones. For example, it combined 'WEIGHT' and 'NO_STOCKED', and it created AVERAGE (the average weight for each salmon in each stocking event in grams).
 
 
-### Exercise 4
+### Exercise 4 -.5
 
 ```{r summary-statistics}
 salmon_stock %>% 
